@@ -17,7 +17,7 @@ export default function Signup() {
     //   ...prev,
     //   [id]: value,
     // }));
-    const temp = formData;
+    const temp = {...formData};
     temp[id] = value;
     setFormData(temp);
   }
