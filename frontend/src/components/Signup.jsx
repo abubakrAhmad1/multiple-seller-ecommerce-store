@@ -1,66 +1,33 @@
-import { useState } from "react";
-import { signInWithGoogle } from "../firebase";
+import { useSelector, useDispatch } from "react-redux";
+import { googleSignUp, handleChange } from "../redux/slice/signupSlice";
 
 export default function Signup() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    type: "",
-  });
-
-  const [googleUser, setGoogleUser] = useState(null);
-
-  function handleChange(e) {
-    const { id, value } = e.target;
-    // setFormData(prev => ({
-    //   ...prev,
-    //   [id]: value,
-    // }));
-    const temp = {...formData};
-    temp[id] = value;
-    setFormData(temp);
-  }
-
-  function handleSelectChange(e) {
-    setFormData(prev => ({
-      ...prev,
-      type: e.target.value,
-    }));
-  }
+  const dispatch = useDispatch();
+  const variables = useSelector((state) => state.signup);
 
   async function googleSignIn(event) {
     event.preventDefault();
 
-    if (!formData.type) {
+    if (!variables.type) {
       alert("Please select a user type before signing in with Google.");
       return;
     }
-
-    try {
-      const res = await signInWithGoogle();
-      setGoogleUser(res.user); // You can use this to send to backend
-      console.log("Google User:", res.user);
-
-      // OPTIONAL: Send to your backend with formData.type
-      // Example:
-      // await fetch('/api/save-user', { method: 'POST', body: JSON.stringify({ ...res.user, type: formData.type }) })
-
-    } catch (err) {
-      console.error("Google Sign-In Failed", err);
-    }
+    dispatch(googleSignUp());
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.password || !formData.type) {
+    if (
+      !variables.name ||
+      !variables.email ||
+      !variables.password ||
+      !variables.type
+    ) {
       alert("Please fill in all fields.");
       return;
     }
-
-    // Submit formData to your backend or Firebase
-    console.log("Normal Signup Data:", formData);
+    //HERE THE SUBMIT THUNK CAN BE CALLED LIKE "dispatch(submitFormData(varibales))" 
   }
 
   return (
@@ -72,16 +39,35 @@ export default function Signup() {
           <legend>Details</legend>
 
           <label htmlFor="name">Full Name</label>
-          <input type="text" id="name" value={formData.name} onChange={handleChange} />
+          <input
+            type="text"
+            id="name"
+            value={variables.name}
+            onChange={(e) => dispatch(handleChange(e.target))}
+          />
 
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" value={formData.email} onChange={handleChange} />
+          <input
+            type="email"
+            id="email"
+            value={variables.email}
+            onChange={(e) => dispatch(handleChange(e.target))}
+          />
 
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" value={formData.password} onChange={handleChange} />
+          <input
+            type="password"
+            id="password"
+            value={variables.password}
+            onChange={(e) => dispatch(handleChange(e.target))}
+          />
 
           <label htmlFor="type">Select Type</label>
-          <select id="type" value={formData.type} onChange={handleSelectChange}>
+          <select
+            id="type"
+            value={variables.type}
+            onChange={(e) => dispatch(handleChange(e.target))}
+          >
             <option value="" disabled>
               Select Type
             </option>
