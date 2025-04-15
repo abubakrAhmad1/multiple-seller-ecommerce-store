@@ -4,8 +4,14 @@ export const fetchItems = createAsyncThunk(
   "searchProducts/fetchItems",
   async (searchTerm) => {
     //API calling here to get data according to the search terms
-    const result = fetch("API").then(res => res.json());
-    return result;
+    const result = await fetch("https://fakestoreapi.com/products").then(res => res.json());
+    if(searchTerm === null) {
+      return result;
+    }
+    else {
+      return result.filter(product => product.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+    
   }
 );
 
@@ -13,8 +19,13 @@ const searchProductSlice = createSlice({
   name: "searchProducts",
   initialState: {
     searchedItems: [],
+    selectedProducts :[],
   },
-  reducers: {},
+  reducers: {
+    addSelectedProducts:(state,action)=> {
+      state.selectedProducts.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchItems.fulfilled, (state, action) => {
       state.searchedItems = action.payload;
@@ -22,5 +33,5 @@ const searchProductSlice = createSlice({
   },
 });
 
-export const {} = searchProductSlice.actions;
+export const {addSelectedProducts} = searchProductSlice.actions;
 export default searchProductSlice.reducer;
