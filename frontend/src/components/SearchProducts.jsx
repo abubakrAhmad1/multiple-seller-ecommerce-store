@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 
 export default function SearchProducts() {
   const dispatch = useDispatch();
-  const { searchedItems ,selectedProducts} = useSelector((state) => state.searchProducts);
+  const searchedItems = useSelector(
+    (state) => state.searchProducts.searchedItems
+  );
   const searchRef = useRef();
 
   return (
@@ -15,20 +17,16 @@ export default function SearchProducts() {
       <button onClick={() => dispatch(fetchItems(searchRef.current.value))}>
         Search
       </button>
+      <Link to="/cart">Cart</Link>
 
       {searchedItems.length > 0 && (
         <ol>
           {searchedItems.map((item, index) => (
-            <EachProduct item = {item}/>
+            <EachProduct item={item} />
           ))}
         </ol>
       )}
 
-      {
-        selectedProducts.length > 0 && (
-          <Link to='/cart'>Cart</Link>
-        )
-      }
     </div>
   );
 }
