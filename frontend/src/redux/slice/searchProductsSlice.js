@@ -24,6 +24,7 @@ const searchProductSlice = createSlice({
   reducers: {
     addSelectedProducts:(state,action)=> {
       state.selectedProducts.push(action.payload);
+      // console.log(state.selectedProducts.length);
     },
   },
   extraReducers: (builder) => {

@@ -2,10 +2,11 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchItems } from "../redux/slice/searchProductsSlice";
 import EachProduct from "./EachProduct";
+import { Link } from "react-router-dom";
 
 export default function SearchProducts() {
   const dispatch = useDispatch();
-  const { searchedItems } = useSelector((state) => state.searchProducts);
+  const { searchedItems ,selectedProducts} = useSelector((state) => state.searchProducts);
   const searchRef = useRef();
 
   return (
@@ -18,12 +19,16 @@ export default function SearchProducts() {
       {searchedItems.length > 0 && (
         <ol>
           {searchedItems.map((item, index) => (
-            //SHOW WHATEVER YOU WANT TO SHOW AS A SINGLE PRODUCT MAY BE AN OTHER COMPONENT LIKE <Product />
-            // <li key={index}>{item.title}</li>
             <EachProduct item = {item}/>
           ))}
         </ol>
       )}
+
+      {
+        selectedProducts.length > 0 && (
+          <Link to='/cart'>Cart</Link>
+        )
+      }
     </div>
   );
 }
