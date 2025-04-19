@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { googleSignUp, handleChange } from "../redux/slice/signupSlice";
+import { googleSignUp, handleChange ,submitFormData} from "../redux/slice/signupSlice";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -28,6 +28,7 @@ export default function Signup() {
       return;
     }
     //HERE THE SUBMIT THUNK CAN BE CALLED LIKE "dispatch(submitFormData(varibales))" 
+    dispatch(submitFormData(variables));
   }
 
   return (

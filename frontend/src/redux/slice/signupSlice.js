@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { signInWithGoogle } from '../../firebase';
+import axios from 'axios';
+
 
 export const googleSignUp = createAsyncThunk(
   'signup/googleSignUp',
@@ -12,7 +14,7 @@ export const googleSignUp = createAsyncThunk(
 export const submitFormData = createAsyncThunk(
     "signUp/submitFormData",
     async (FormData)=> {
-        await fetch("api" ,{
+        await axios.post("http://localhost:8000/buyer/" ,{
             method: "POST",
             headers : {"Content-Type" : "application./json"},
             body : JSON.stringify(FormData)
