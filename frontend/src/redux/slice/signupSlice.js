@@ -14,11 +14,9 @@ export const googleSignUp = createAsyncThunk(
 export const submitFormData = createAsyncThunk(
     "signUp/submitFormData",
     async (FormData)=> {
-        await axios.post("http://localhost:8000/buyer/" ,{
-            method: "POST",
-            headers : {"Content-Type" : "application./json"},
-            body : JSON.stringify(FormData)
-        })
+      console.log(FormData);
+        const res = await axios.post(`http://localhost:8000/${FormData.type}/signUp`,FormData);
+        console.log(res);
     }
 );
 

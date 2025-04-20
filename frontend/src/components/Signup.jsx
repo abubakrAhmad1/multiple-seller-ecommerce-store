@@ -73,7 +73,7 @@ export default function Signup() {
               Select Type
             </option>
             <option value="seller">Seller</option>
-            <option value="customer">Customer</option>
+            <option value="buyer">Buyer</option>
           </select>
 
           <button onClick={googleSignIn}>Sign Up with Google</button>
