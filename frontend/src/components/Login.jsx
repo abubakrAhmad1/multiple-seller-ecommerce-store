@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { handleChange,submitSignInData } from "../redux/slice/signInSlice";
+import { handleChange, submitSignInData } from "../redux/slice/signInSlice";
 
 export default function Login() {
   const variables = useSelector((state) => state.signin);
@@ -7,9 +7,9 @@ export default function Login() {
 
   function loginFunction(event) {
     event.preventDefault();
-    if(!variables.name || !variables.password) {
-        alert("please enter complete credentials");
-        return;
+    if (!variables.name || !variables.password || !variables.type) {
+      alert("please enter complete credentials");
+      return;
     }
     dispatch(submitSignInData(variables));
   }
@@ -32,6 +32,18 @@ export default function Login() {
             value={variables.password}
             onChange={(e) => dispatch(handleChange(e.target))}
           />
+
+          <select
+            id="type"
+            value={variables.type}
+            onChange={(e) => dispatch(handleChange(e.target))}
+          >
+            <option value="" disabled selected>
+              Select Type
+            </option>
+            <option value="seller">Seller</option>
+            <option value="buyer">Buyer</option>
+          </select>
 
           <button onClick={loginFunction}>Login In</button>
         </fieldset>
