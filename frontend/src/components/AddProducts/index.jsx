@@ -4,6 +4,7 @@ export default function AddProducts() {
   const sellerProducts = useSelector(
     (state) => state.addProducts.storedProducts
   );
+  const LoginUser = useSelector(state => state.loginUser);
   const navigate = useNavigate();
 
   return (

@@ -1,12 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getImages } from "../../redux/slice/addProductsSlice";
+import { useRef } from "react";
 
 export default function ProductDiscription() {
-    function submitProducts (event) {
-        event.preventDefault();
-        //CALL THE BELOW FUNCTION IF WE HAVE TO SUBMIT ALL DETAILS OF A SPECIFIC PRODUCT
-        //postProduct();
-    }
+  const titleRef = useRef();
+  const typeRef = useRef();
+  const discriptionRef = useRef();
+  const qtyRef = useRef();
+
+  function submitProducts(event) {
+    event.preventDefault();
+    //CALL THE BELOW FUNCTION IF WE HAVE TO SUBMIT ALL DETAILS OF A SPECIFIC PRODUCT
+    //postProduct();
+  }
 
   const selectedImages = useSelector(
     (state) => state.addProducts.selectedImages
@@ -18,11 +24,12 @@ export default function ProductDiscription() {
       <form action="">
         <label htmlFor="title">Title</label>
         <br />
-        <input type="text" id="title" onChange/>
+        <input type="text" id="title" ref={titleRef} onChange />
         <br />
-        <label htmlFor="discription">Discription</label>
+        <label htmlFor="discription" >Discription</label>
         <br />
         <textarea
+        ref={discriptionRef}
           name="discription"
           id="discription"
           placeholder="Add Discription"
@@ -31,7 +38,7 @@ export default function ProductDiscription() {
         />
         <br />
         <label htmlFor="qty">Please Enter Quantitiy</label>
-        <input type="number" id="qty" />
+        <input type="number" id="qty" ref={qtyRef}/>
         <br />
         <label htmlFor="images">Upload Product Images:</label>
         <br />
@@ -56,7 +63,9 @@ export default function ProductDiscription() {
             />
           ))}
         </div>
-        <button type="submit" onClick = {submitProducts}>Add Produt</button>
+        <button type="submit" onClick={submitProducts}>
+          Add Produt
+        </button>
       </form>
     </div>
   );

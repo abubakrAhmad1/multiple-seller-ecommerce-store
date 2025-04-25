@@ -17,6 +17,11 @@ export default function Login() {
     dispatch(submitSignInData(variables))
       .unwrap()
       .then((res) => {
+        // console.log(res.data._id);
+        const obj = {
+          id : res.data._id,
+          ...variables
+        };
         dispatch(setUser(variables));
         navigate("/searchProducts");
       })
