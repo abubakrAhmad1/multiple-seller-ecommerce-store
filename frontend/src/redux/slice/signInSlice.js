@@ -7,7 +7,8 @@ export const submitSignInData = createAsyncThunk("signin", async (data) => {
     data
   );
   if (user !== null) {
-    console.log("User Found..!!",user);
+    // console.log("User Found..!!",user);
+    return user;
   }
 });
 
@@ -23,6 +24,11 @@ const signInSlice = createSlice({
     handleChange: (state, action) => {
       state[action.payload.id] = action.payload.value;
     },
+    clear : (state,action) => {
+      state.name ="";
+      state.password = "";
+      state.type ="";
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(submitSignInData.fulfilled, (state, action) => {

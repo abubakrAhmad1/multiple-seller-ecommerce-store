@@ -9,10 +9,12 @@ export default function SearchProducts() {
   const searchedItems = useSelector(
     (state) => state.searchProducts.searchedItems
   );
+  const LoginUser = useSelector(state => state.loginUser);
   const searchRef = useRef();
 
   return (
     <div>
+      <h3>Hello {LoginUser.name}</h3>
       <input type="search" ref={searchRef} />
       <button onClick={() => dispatch(fetchItems(searchRef.current.value))}>
         Search

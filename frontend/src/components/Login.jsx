@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { handleChange, submitSignInData } from "../redux/slice/signInSlice";
+import {setUser} from '../redux/slice/loginUser';
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const variables = useSelector((state) => state.signin);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function loginFunction(event) {
     event.preventDefault();
@@ -11,7 +14,15 @@ export default function Login() {
       alert("please enter complete credentials");
       return;
     }
-    dispatch(submitSignInData(variables));
+    dispatch(submitSignInData(variables))
+      .unwrap()
+      .then((res) => {
+        dispatch(setUser(variables));
+        navigate("/searchProducts");
+      })
+      .catch((error) => {
+        alert("Wrong Credentials.!!");
+      });
   }
   return (
     <div>
