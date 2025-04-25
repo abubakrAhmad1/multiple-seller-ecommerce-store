@@ -1,18 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getImages, postProduct } from "../../redux/slice/addProductsSlice";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductDiscription() {
   const titleRef = useRef();
   const discriptionRef = useRef();
   const qtyRef = useRef();
   const priceRef = useRef();
+  const navigate = useNavigate();
 
   const selectedImages = useSelector(
     (state) => state.addProducts.selectedImages
   );
 
-  const userID = useSelector((state) => state.loginUser.id);
+  const userName = useSelector((state) => state.loginUser.name);
   const dispatch = useDispatch();
 
   function submitProducts(event) {
@@ -20,14 +22,17 @@ export default function ProductDiscription() {
     //CALL THE BELOW FUNCTION IF WE HAVE TO SUBMIT ALL DETAILS OF A SPECIFIC PRODUCT
     //postProduct();
     const obj = {
-      userId: userID,
+      // userId: userID,
+      name : userName,
       title: titleRef.current.value,
       price: priceRef.current.value,
       discription: discriptionRef.current.value,
       qty: qtyRef.current.value,
       imageUrl: selectedImages,
     };
+    console.log(obj);
     dispatch(postProduct(obj));
+    navigate("/addProducts");
   }
 
   return (
