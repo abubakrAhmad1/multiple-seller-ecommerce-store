@@ -1,8 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { googleSignUp, handleChange } from "../redux/slice/signupSlice";
+import { googleSignUp, handleChange ,submitFormData} from "../redux/slice/signupSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const variables = useSelector((state) => state.signup);
 
   async function googleSignIn(event) {
@@ -28,6 +30,8 @@ export default function Signup() {
       return;
     }
     //HERE THE SUBMIT THUNK CAN BE CALLED LIKE "dispatch(submitFormData(varibales))" 
+    dispatch(submitFormData(variables));
+    navigate('/login');
   }
 
   return (
@@ -72,7 +76,7 @@ export default function Signup() {
               Select Type
             </option>
             <option value="seller">Seller</option>
-            <option value="customer">Customer</option>
+            <option value="buyer">Buyer</option>
           </select>
 
           <button onClick={googleSignIn}>Sign Up with Google</button>

@@ -3,6 +3,7 @@ import signupReducer from "../slice/signupSlice";
 import signinReducer from "../slice/signInSlice";
 import searchProductsReducer from '../slice/searchProductsSlice';
 import addProductsReducer from '../slice/addProductsSlice';
+import LoginUserReducer from '../slice/loginUser';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     signin: signinReducer,
     searchProducts : searchProductsReducer,
     addProducts : addProductsReducer,
+    loginUser : LoginUserReducer,
   },
 });
 
