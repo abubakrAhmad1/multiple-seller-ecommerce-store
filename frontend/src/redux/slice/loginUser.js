@@ -15,6 +15,9 @@ const loginUser = createSlice({
       state.type = action.payload.type || "";
       state.images = action.payload.images ? [...action.payload.images] : [];
     },
+    addProduct : (state, action) => {
+      
+    }
   },
 });
 

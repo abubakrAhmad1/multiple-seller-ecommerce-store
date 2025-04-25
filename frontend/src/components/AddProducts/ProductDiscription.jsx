@@ -1,35 +1,46 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getImages } from "../../redux/slice/addProductsSlice";
+import { getImages, postProduct } from "../../redux/slice/addProductsSlice";
 import { useRef } from "react";
 
 export default function ProductDiscription() {
   const titleRef = useRef();
-  const typeRef = useRef();
   const discriptionRef = useRef();
   const qtyRef = useRef();
+  const priceRef = useRef();
+
+  const selectedImages = useSelector(
+    (state) => state.addProducts.selectedImages
+  );
+
+  const userID = useSelector((state) => state.loginUser.id);
+  const dispatch = useDispatch();
 
   function submitProducts(event) {
     event.preventDefault();
     //CALL THE BELOW FUNCTION IF WE HAVE TO SUBMIT ALL DETAILS OF A SPECIFIC PRODUCT
     //postProduct();
+    const obj = {
+      userId: userID,
+      title: titleRef.current.value,
+      price: priceRef.current.value,
+      discription: discriptionRef.current.value,
+      qty: qtyRef.current.value,
+      imageUrl: selectedImages,
+    };
+    dispatch(postProduct(obj));
   }
-
-  const selectedImages = useSelector(
-    (state) => state.addProducts.selectedImages
-  );
-  const dispatch = useDispatch();
 
   return (
     <div>
       <form action="">
         <label htmlFor="title">Title</label>
         <br />
-        <input type="text" id="title" ref={titleRef} onChange />
+        <input type="text" id="title" ref={titleRef} />
         <br />
-        <label htmlFor="discription" >Discription</label>
+        <label htmlFor="discription">Discription</label>
         <br />
         <textarea
-        ref={discriptionRef}
+          ref={discriptionRef}
           name="discription"
           id="discription"
           placeholder="Add Discription"
@@ -38,7 +49,10 @@ export default function ProductDiscription() {
         />
         <br />
         <label htmlFor="qty">Please Enter Quantitiy</label>
-        <input type="number" id="qty" ref={qtyRef}/>
+        <input type="number" id="qty" ref={qtyRef} />
+        <br />
+        <label htmlFor="price">Please Enter Price</label>
+        <input type="number" id="price" ref={priceRef} />
         <br />
         <label htmlFor="images">Upload Product Images:</label>
         <br />

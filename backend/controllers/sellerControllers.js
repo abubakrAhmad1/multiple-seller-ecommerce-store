@@ -23,3 +23,7 @@ exports.signIn = async (req,res) => {
        res.status(400).json({ message: err.message });
      }
 };
+
+exports.addProduct = async (req,res) => {
+  
+};

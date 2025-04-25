@@ -4,6 +4,7 @@ const {signUp, signIn } = require('../controllers/sellerControllers');
 
 router.post('/signUp', signUp);
 router.post('/signIn',signIn);
+router.post('product',addProduct);
 
 
 module.exports = router;

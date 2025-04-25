@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
+import axios from "axios";
 
 export const fetchProducts = createAsyncThunk(
     'addProductsSlice' , async(sellerID) => {
@@ -8,10 +8,9 @@ export const fetchProducts = createAsyncThunk(
 );
 
 export const postProduct = createAsyncThunk('addproductSlicePostProduct',
-    async(_, ThunkAPI) => {
-        const state = ThunkAPI.getState();
-        const {productDisc}  = state;
+    async(data) => {
         //send all the products of the slice to the respective DB
+        await axios.post(`http://localhost:8000/seller/product`,data);
     }
 )
 
