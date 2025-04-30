@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { googleSignUp, handleChange ,submitFormData} from "../redux/slice/signupSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -81,6 +81,7 @@ export default function Signup() {
 
           <button onClick={googleSignIn}>Sign Up with Google</button>
           <button onClick={handleSubmit}>Submit</button>
+          <Link to={'/login'}>Already Have an Account? Click to Login</Link>
         </fieldset>
       </form>
     </div>

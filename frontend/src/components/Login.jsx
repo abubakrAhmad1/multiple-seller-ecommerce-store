@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { handleChange, submitSignInData } from "../redux/slice/signInSlice";
 import { setUser } from "../redux/slice/loginUser";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const variables = useSelector((state) => state.signin);
@@ -59,8 +59,8 @@ export default function Login() {
             <option value="seller">Seller</option>
             <option value="buyer">Buyer</option>
           </select>
-
           <button onClick={loginFunction}>Login In</button>
+          <Link to={'/signup'}>Not Have an Account? Click to create Account</Link>
         </fieldset>
       </form>
     </div>
