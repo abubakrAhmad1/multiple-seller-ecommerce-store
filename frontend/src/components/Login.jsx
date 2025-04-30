@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { handleChange, submitSignInData } from "../redux/slice/signInSlice";
-import {setUser} from '../redux/slice/loginUser';
+import { setUser } from "../redux/slice/loginUser";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -18,7 +18,11 @@ export default function Login() {
       .unwrap()
       .then((res) => {
         dispatch(setUser(variables));
-        navigate("/searchProducts");
+        if (variables.type === "seller") {
+          navigate('/AddProducts');
+        } else {
+          navigate("/searchProducts");
+        }
       })
       .catch((error) => {
         alert("Wrong Credentials.!!");

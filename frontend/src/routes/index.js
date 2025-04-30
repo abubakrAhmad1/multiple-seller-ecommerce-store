@@ -1,4 +1,3 @@
-// src/router.js
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Login from "../components/Login";
@@ -13,12 +12,13 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { path: "/login", element: <Login /> },
-      { path: "/signup", element: <Signup /> },
-      { path: "/searchProducts", element: <SearchProducts /> },
-      { path: "/cart", element: <Cart /> },
-      { path: "/addProducts", element: <AddProducts /> },
-      { path: "/addProductDiscription", element: <ProductDiscription /> },
+      { index: true, element: <Login /> }, // 👈 This makes / show the Login page
+      { path: "login", element: <Login /> },
+      { path: "signup", element: <Signup /> },
+      { path: "searchProducts", element: <SearchProducts /> },
+      { path: "cart", element: <Cart /> },
+      { path: "addProducts", element: <AddProducts /> },
+      { path: "addProductDiscription", element: <ProductDiscription /> },
     ],
   },
 ]);
