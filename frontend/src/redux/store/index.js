@@ -1,17 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
 import signupReducer from "../slice/signupSlice";
 import signinReducer from "../slice/signInSlice";
-import searchProductsReducer from '../slice/searchProductsSlice';
-import addProductsReducer from '../slice/addProductsSlice';
-import LoginUserReducer from '../slice/loginUser';
+import productsReducer from '../slice/searchProductsSlice';
+import cartReducer from '../slice/cartSlice';
+import orderReducer from '../slice/orderSlice';
+import myProductsReducer from '../slice/productSlice';
+import loginUserReducer from '../slice/loginUser';
 
 const store = configureStore({
   reducer: {
     signup: signupReducer,
     signin: signinReducer,
-    searchProducts : searchProductsReducer,
-    addProducts : addProductsReducer,
-    loginUser : LoginUserReducer,
+    products: productsReducer,
+    cart: cartReducer,
+    orders: orderReducer,
+    myProducts: myProductsReducer,
+    loginUser: loginUserReducer,
   },
 });
 
