@@ -246,7 +246,10 @@ This project demonstrates:
 
 ## 📝 Notes
 
-- Make sure MongoDB is running before starting the backend
+- **⚠️ IMPORTANT: MongoDB must be running before starting the backend**
+  - See `MONGODB_SETUP.md` for detailed MongoDB setup instructions
+  - The server will start but show clear error messages if MongoDB is not connected
+  - All database operations will fail until MongoDB is running
 - Update JWT_SECRET in production
 - Configure proper CORS settings for production
 - Use cloud storage (AWS S3, Cloudinary) for images in production

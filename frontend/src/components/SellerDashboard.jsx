@@ -5,7 +5,6 @@ import { fetchMyProducts, deleteProduct } from '../redux/slice/productSlice';
 import api from '../utils/api';
 import Navbar from './Navbar';
 import '../styles/global.css';
-import api from '../utils/api';
 
 export default function SellerDashboard() {
   const dispatch = useDispatch();

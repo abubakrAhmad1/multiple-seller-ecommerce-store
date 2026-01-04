@@ -12,7 +12,10 @@ const errorHandler = require('./middleware/errorHandler');
 const app = express();
 
 // Connect to database
-connectDB();
+connectDB().catch((error) => {
+  console.error('Failed to connect to database. Server will start but database operations will fail.');
+  console.error('Please start MongoDB and restart the server.');
+});
 
 // Middleware
 app.use(express.json());
